@@ -19,15 +19,11 @@ Python 3.8
 ## Launch
 From a terminal having Python:
 
-* Create a virtual environment
-```Bash
+* create a virtual environment
+```bash
 ./create_venv.sh
 ```
-* Install the requirements
-```Bash
-pip install requirements.txt
-```
-* Run the tests
-```Bash
+* run the tests
+```bash
 ./launch_pytest.sh
 ```
