@@ -8,7 +8,8 @@
 <a id="description"></a>
 ## Description
 The following is part of the coding dojo series with the objectif to implement a classic battleship on a 10x10 grid in pair programming.
-source: (https://www.codurance.com/katas/battleships)
+
+Source: (https://www.codurance.com/katas/battleships)
 
 <a id="technologies"></a>
 ## Technologies
