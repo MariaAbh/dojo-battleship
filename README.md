@@ -7,7 +7,7 @@
 
 <a id="description"></a>
 ## Description
-The following is part of the coding dojo series with the objectif to implement a classic battleship on a 10x10 grid in pair programming.
+The following is part of the coding dojo series with the objectif to implement a classic battleship on a 10x10 grid following a TDD environment in pair programming.
 
 Source: (https://www.codurance.com/katas/battleships)
 
