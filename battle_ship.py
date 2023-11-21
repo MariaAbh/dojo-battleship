@@ -13,36 +13,27 @@ class Player():
 				return 'x'
 		return 'o'
 
-	def reset(self,row,col,index,direction):
-		for i in range(0,index):
-			if direction == 'h':
-				self.grid[row][col+i] = ''
-			else:
-				self.grid[row+i][col] = ''
+	def check_available(self,coordinates):
+		for r,c in coordinates:
+			if not 0<=r<10 or not 0<=c<10 or self.grid[r][c] != '':
+				return False
+		return True
 
 	def place(self,row,col,ship,direction):
 		ship_lenght = self.ships[ship]
-
-		for c in range(0,ship_lenght):
+		coordinates = list()
+		for i in range(0,ship_lenght):
 			if direction == 'h':
-				if 0<=col+c<10:
-					if self.grid[row][col+c] != '':
-						self.reset(row,col,c,direction)
-						return False
-					
-					self.grid[row][col+c] = ship
-				else:
-					self.reset(row,col,c,direction)
-					return False
+				coordinates.append((row,i+col))
 			else:
-				if 0<=row+c<10:
-					if self.grid[row+c][col] != '':
-						self.reset(row,col,c,direction)
-						return False
-					self.grid[row+c][col] = ship
-				else:
-					self.reset(row,col,c,direction)
-					return False
+				coordinates.append((i+row,col))
+		available = self.check_available(coordinates)
+		
+		if available:
+			for r,c in coordinates:
+				self.grid[r][c] = ship
+		else:
+			return False
 		return True
 
 
