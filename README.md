@@ -21,7 +21,7 @@ From a terminal having Python:
 
 * create a virtual environment
 ```bash
-./create_venv.sh
+./setup.sh
 ```
 * run the tests
 ```bash
