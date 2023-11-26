@@ -9,13 +9,13 @@ def test_player_response():
 def test_place_ship():
 	player = Player()
 	player.place(1,4,'g','h')
-	assert(player.grid[1][4] == 'g')
+	assert(player.grid[1][4].name == 'g')
 
 def test_player_receive_on_ship():
 	player = Player()
 	player.place(1,4,'g','h')
 	res = player.handle(1,4)
-	assert(res == 'x')
+	assert(res == 'X')
 
 def test_game_end():
 	game = Game()
@@ -30,28 +30,28 @@ def test_player_added():
 def test_player_place_cargot():
 	player = Player()
 	player.place(0,0,'c','h')
-	assert(player.grid[0][0] == 'c')
-	assert(player.grid[0][1] == 'c')
-	assert(player.grid[0][2] == 'c')
-	assert(player.grid[0][3] == 'c')
+	assert(player.grid[0][0].name == 'c')
+	assert(player.grid[0][1].name == 'c')
+	assert(player.grid[0][2].name == 'c')
+	assert(player.grid[0][3].name == 'c')
 
 def test_player_place_destroyer():
 	player = Player()
 	player.place(0,0,'d','h')
-	for __ in range(3):
-		assert(player.grid[0][__] == 'd')
+	for i in range(3):
+		assert(player.grid[0][i].name == 'd')
 	
 def test_player_place_destroyer_vertical():
 	player = Player()
 	player.place(0,0,'d','v')
-	for __ in range(3):
-		assert(player.grid[__][0] == 'd')
+	for i in range(3):
+		assert(player.grid[i][0].name == 'd')
 
 def test_player_place_destroyer_middle():
 	player = Player()
 	player.place(3,3,'d','h')
 	for i in range(3):
-		assert(player.grid[3][3+i] == 'd')
+		assert(player.grid[3][3+i].name == 'd')
 
 def test_partial():
 	player = Player()
@@ -74,7 +74,7 @@ def test_collide_smool():
 	assert(res == True)
 	res = player.place(5,3,'g','v')
 	assert(res == False)
-	assert(player.handle(5,3) == 'x')
+	assert(player.handle(5,3) == 'X')
 
 
 @pytest.mark.parametrize('ship', 'dc')
@@ -102,8 +102,12 @@ def test_hit(line, col, direction, ship):
 	assert(res == True)
 
 	pos_in = {(line+dl*i, col+dc*i) for i in range(length)}
-	for l,c in pos_in:
-		assert(player.handle(l,c) == 'x')
+
+	pos_in_list = list(pos_in)
+	for l,c in pos_in_list[:-1]:
+		assert(player.handle(l,c) in 'x')
+	for l,c in pos_in_list[-1:]:
+		assert(player.handle(l,c) in 'X')
 	for i in range(-20, 20):
 		for j in range(-20, 20):
 			if (i,j) not in pos_in:
@@ -120,4 +124,4 @@ def test_player_place_cargo_middle():
 	res = player.place(3,3,'c','h')
 	assert(res == True)
 	for i in range(4):
-		assert(player.grid[3][3+i] == 'c')
+		assert(player.grid[3][3+i].name == 'c')
