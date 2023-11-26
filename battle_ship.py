@@ -1,14 +1,17 @@
 class Ship():
 	def __init__(self,size):
 		self.size = size
-		self.cells = []
 		self.ship_state = 'clear'
+		self.touched = 0
 
 	def update_state(self):
-		if all(c.state=='touched' for c in self.cells):
+		self.touched += 1
+		if self.touched == self.size:
 			self.ship_state = 'drowned'
 		else:
 			self.ship_state = 'touched'
+
+	def return_state(self):
 		return self.ship_state
 
 class Cell():
@@ -18,8 +21,10 @@ class Cell():
 		self.name = name
 	
 	def update_cell(self):
-		self.state = 'touched'
-		return self.ship.update_state()
+		if self.state == 'clear':
+			self.state = 'touched'
+			self.ship.update_state()
+		return self.ship.return_state()
 
 class Player():
 	ships = {
@@ -67,7 +72,6 @@ class Player():
 			for r,c in coordinates:
 				cell = Cell(new_ship,ship)
 				self.grid[r][c] = cell
-				new_ship.cells.append(cell)
 		return available
 
 class Game():
