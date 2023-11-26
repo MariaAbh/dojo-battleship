@@ -17,6 +17,15 @@ def test_player_receive_on_ship():
 	res = player.handle(1,4)
 	assert(res == 'X')
 
+
+def test_acharnement():
+	player = Player()
+	player.place(1,4,'d','h')
+	for i in range(10):
+		res = player.handle(1,4)
+		print(i)
+		assert(res == 'x')
+
 def test_game_end():
 	game = Game()
 	assert(game.ended() == False)
